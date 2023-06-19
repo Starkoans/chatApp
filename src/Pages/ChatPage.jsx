@@ -3,6 +3,7 @@ import {db} from "../firebase.js";
 import {Timestamp} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {useAuth} from "../hooks/UseAuth.js";
+import {UserSearch} from "../Components/UserSearchPanel.jsx";
 
 function ChatPage () {
 
@@ -56,6 +57,10 @@ function ChatPage () {
     return(
         <> {
             user.isAuth? <div>
+
+                <div>
+                   <UserSearch/>
+                </div>
                 {messages.map((message, key)=>{return(
                     <div key={key}>
                         <p>{message.username} : {message.text}</p>
