@@ -1,4 +1,4 @@
-### chatApp
+## chatApp
 
 ## Изпользуемый стек:
 - React
@@ -7,5 +7,5 @@
 - Vite
 
 Для запуска перейти в директирию проекта и написать в консоли:
-`npm install` \n
+`npm install`
 `npm run dev`
