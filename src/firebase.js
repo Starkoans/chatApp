@@ -10,13 +10,14 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBeV2WIkVjdlLFJ9I38pOc886CNB75lijE",
-    authDomain: "items-log.firebaseapp.com",
-    databaseURL: "https://items-log-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "items-log",
-    storageBucket: "items-log.appspot.com",
-    messagingSenderId: "17111513771",
-    appId: "1:17111513771:web:1b56d96f1a3460671b55ee"
+    
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_DATABASE_URl,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase

@@ -11,7 +11,8 @@ import RegisterPage from "./Pages/RegisterPage.jsx";
 import {Provider} from "react-redux";
 import {store} from "./store/store.js";
 import ProfilePage from "./Pages/ProfilePage.jsx";
-import {useAuth} from "./hooks/UseAuth.js";
+import {Chat} from "./Components/Chat.jsx";
+
 
 
 
@@ -23,8 +24,14 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
         children: [
             {
-                path: "chat/:chatId",
+                path: "chat/?",
                 element: <ChatPage />,
+                children: [
+                    {
+                        path: ":chatId",
+                        element:<Chat/>
+                    }
+                ]
             },
             {
                 path: `user/:userID`,
