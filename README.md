@@ -1,6 +1,6 @@
 ### chatApp
 
-##Изпользуемый стек:
+## Изпользуемый стек:
 -React
 -Redux Toolkit
 -Firebase (Authentication, Realtime Database, Firestore)
