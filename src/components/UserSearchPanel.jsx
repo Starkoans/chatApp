@@ -97,7 +97,7 @@ function UserSearch() {
     }
 
     return(
-        <div style={{background: 'lightgrey'}}>
+        <div className="bg-gradient" style={{background: 'lightgrey', maxWidth: '300px'}}>
             <form onSubmit={handleSearchUser}>
                 <input type={"text"}
                        onKeyDown={(e)=> {

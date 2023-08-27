@@ -3,8 +3,8 @@ import {db} from "../firebase.js";
 import {Timestamp} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {useAuth} from "../hooks/UseAuth.js";
-import {UserSearch} from "../Components/UserSearchPanel.jsx";
-import {Chat} from "../Components/Chat.jsx";
+import {UserSearch} from "../components/UserSearchPanel.jsx";
+import {Chat} from "../components/Chat.jsx";
 import {Outlet} from "react-router-dom";
 
 function ChatPage () {
@@ -43,7 +43,7 @@ function ChatPage () {
     return(
         <>
             {
-                user.isAuth? <div> <UserSearch/> <Outlet /> </div> : null
+                user.isAuth? <div className="d-flex justify-content-center"> <UserSearch/> <Outlet /> </div> : null
             }
         </>
     )

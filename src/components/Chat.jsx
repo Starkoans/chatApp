@@ -6,6 +6,7 @@ import {db} from "../firebase.js";
 import {useSelectedChat} from "../hooks/useSelectedChat.js";
 
 import {Timestamp} from "firebase/firestore";
+import ChatMessage from "./ChatMessage.jsx";
 
 function Chat() {
 
@@ -34,22 +35,13 @@ const [newMessageText, setNewMessageText] = useState('');
 
  }
 
- return( <div>
+ return( <div className="bg-warning" style={{maxWidth: '950px'}} >
   {selectedChat.messagesList === null? <p>Сообщений пока нет...</p>:
-      <div>
+      <div style={{maxHeight: '600px', overflow: 'auto'}}>
    {selectedChat.messagesList.map(
        (message, key) => {
         return (
-            <>
-             <div key={key}>
-              <p>{message.userID === currentUser.id ? currentUser.username : selectedChat.username} </p>
-              <p>{message.text}</p>
-              {/*<p>{message.serverTimestamp.toDate.toLocaleDateString()}</p>*/}
-             </div>
-
-
-            </>
-
+             <ChatMessage message={message} key={key}/>
         )
        }
    )}

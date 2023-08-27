@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client'
 
 
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Layout from "./Components/Layout.jsx";
-import ErrorPage from "./Pages/ErrorPage.jsx";
-import ChatPage from "./Pages/ChatPage.jsx";
-import LoginPage from "./Pages/LoginPage.jsx";
-import RegisterPage from "./Pages/RegisterPage.jsx";
+import Layout from "./components/Layout.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
 import {Provider} from "react-redux";
 import {store} from "./store/store.js";
-import ProfilePage from "./Pages/ProfilePage.jsx";
-import {Chat} from "./Components/Chat.jsx";
-
+import ProfilePage from "./pages/ProfilePage.jsx";
+import {Chat} from "./components/Chat.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 
@@ -36,17 +36,19 @@ const router = createBrowserRouter([
             {
                 path: `user/:userID`,
                 element: <ProfilePage/>
+            },
+            {
+                path: '/register',
+                element: <RegisterPage/>
+            },
+            {
+                path:'/login',
+                element: <LoginPage/>
             }
+
         ]
     },
-    {
-        path: '/register',
-        element: <RegisterPage/>
-    },
-    {
-        path:'/login',
-        element: <LoginPage/>
-    }
+
 
 
 ]);
