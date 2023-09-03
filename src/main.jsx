@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Layout from "./components/Layout.jsx";
+import Layout from "./components/Layout/Layout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -11,10 +11,9 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import {Provider} from "react-redux";
 import {store} from "./store/store.js";
 import ProfilePage from "./pages/ProfilePage.jsx";
-import {Chat} from "./components/Chat.jsx";
+import Chat from "./components/Chat/Chat.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-
+import './App.scss'
 
 
 const router = createBrowserRouter([
@@ -26,6 +25,7 @@ const router = createBrowserRouter([
             {
                 path: "chat/?",
                 element: <ChatPage />,
+                errorElement: <ErrorPage/>,
                 children: [
                     {
                         path: ":chatId",
@@ -35,15 +35,18 @@ const router = createBrowserRouter([
             },
             {
                 path: `user/:userID`,
-                element: <ProfilePage/>
+                element: <ProfilePage/>,
+                errorElement: <ErrorPage/>,
             },
             {
                 path: '/register',
-                element: <RegisterPage/>
+                element: <RegisterPage/>,
+                errorElement: <ErrorPage/>,
             },
             {
                 path:'/login',
-                element: <LoginPage/>
+                element: <LoginPage/>,
+                errorElement: <ErrorPage/>,
             }
 
         ]
