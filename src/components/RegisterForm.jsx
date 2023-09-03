@@ -6,6 +6,7 @@ import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, upd
 import {setUser} from '../store/user.slice.js';
 import {collection, doc, setDoc} from '@firebase/firestore';
 import {firestore} from '../firebase.js';
+import { Button } from 'react-bootstrap';
 
 function RegisterForm() {
 	const [email, setEmail] = useState('');
@@ -94,13 +95,13 @@ function RegisterForm() {
 	// useEffect(() => {}, [error]);
 
 	return (
-		<div className="container">
+		<div className="container mt-3 flex-column d-flex rounded-3 bg-candy" style={{width:'300px'}}>
 			<form
 				onSubmit={(event) => {
 					event.preventDefault();
 					handleRegister(email, password, username);
 				}}
-				className="row"
+				className="container mt-3 flex-column  d-flex"
 			>
 				<h3 className="mb-3">Регистрация</h3>
 				<p>
@@ -108,22 +109,17 @@ function RegisterForm() {
 					<Link to={'/login'}>Войти</Link>
 				</p>
 
-				<label htmlFor="username">Никнейм</label>
-				<div className="input-group mb-3">
-					<span  className="input-group-text" id="inputGroupPrepend">
-              				@
-					</span>
+				<label htmlFor="username" className='form-text mb-3'>Никнейм
 					<input required
-						className="form-control rounded-end-2"
-						id="username"
-						type="text"
-						value={username}
-						placeholder={'Никнейм'}
-						onChange={(event) => setUsername(event.target.value)}
+							className="form-control rounded-end-2"
+							id="username"
+							type="text"
+							value={username}
+							placeholder={'Никнейм'}
+							onChange={(event) => setUsername(event.target.value)}
 					/>
-					<div className="invalid-feedback">Please choose a username.</div>
-				</div>
-				<label htmlFor="email" className="mb-3">Почта
+				</label>
+				<label htmlFor="email" className="form-text mb-3">Почта
 					<input
 						id="email"
 						required
@@ -134,7 +130,7 @@ function RegisterForm() {
 						onChange={(event) => setEmail(event.target.value)}
 					/>
 				</label>
-				<label htmlFor="password">Пароль
+				<label htmlFor="password" className='form-text'>Пароль
 					<input
 						required
 						id="password"
@@ -151,11 +147,9 @@ function RegisterForm() {
 					</p>
 				)}
 
-				<button className="btn btn-outline-success btn-lg mt-5" type="submit">
+				<Button className="btn btn-dark my-5 mx-3 " type="submit">
 					Зарегистрироваться
-				</button>
-
-
+				</Button>
 
 			</form>
 		</div>
