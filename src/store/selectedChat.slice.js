@@ -25,6 +25,7 @@ const selectedChatSlice = createSlice({
             state.uid = null;
             state.username = null;
             state.messagesList = [];
+            state.chatId = null;
         }
     }
 })
