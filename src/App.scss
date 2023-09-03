@@ -1,0 +1,16 @@
+@import './components/UserCard/UserCard';
+@import './components/InputEnterGroup/InputEnterGroup';
+@import "components/Message/Message";
+@import "components/Chat/Chat";
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import "components/Layout/Layout";
+.bg-froggy{
+  background-color: #8FAB5F;
+}
+.bg-candy{
+  background: linear-gradient(0deg, rgba(255,209,194,1) 0%, rgba(244,206,149,1) 38%, rgba(255,251,152,1) 100%);
+}
+.btn-dark{
+  background-color: #3F4D4E;
+  color: #fcdf8c;
+}

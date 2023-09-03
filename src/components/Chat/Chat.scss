@@ -1,0 +1,13 @@
+.chat{
+  height: 600px;
+  width: 500px;
+}
+.chat-content{
+  height: 468px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top:4px;
+  padding-bottom:4px
+}
+

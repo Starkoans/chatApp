@@ -1,0 +1,43 @@
+.message{
+    display:flex;
+    margin-bottom: 7px;
+    word-break: break-word;
+}
+.my-message {
+   @extend .message;
+    justify-content:end;
+    .message-box{
+        border-radius: 5px 5px 0 5px;
+    }
+}
+.not-my-message {
+    @extend .message;
+    justify-content:start;
+    .message-box{
+        border-radius: 5px 5px 5px 0;
+    }
+}
+.message-box{
+    background-color: #ffffff;
+    width: fit-content;
+    min-height: 30px;
+    max-width: 320px;
+    padding: 5px 10px;
+}
+
+.my-message-triangle{
+    width: 10px;
+    height: 13px;
+    border-bottom: 10px solid #ffffff;
+    border-right: 14px solid transparent;
+    align-self: end;
+    display: flex;
+}
+.not-my-message-triangle{
+    width: 10px;
+    height: 13px;
+    border-bottom: 10px solid #ffffff;
+    border-left:  14px solid transparent;
+    align-self: end;
+    display: flex;
+}

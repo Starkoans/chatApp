@@ -1,0 +1,20 @@
+.user-card{
+  background-color: white !important;
+  height: 66px;
+  img{
+    height:50px;
+    width:50px;
+  }
+}
+.user-card:hover{
+  background-color: #eaeaea !important;
+  cursor:pointer;
+}
+.user-card-selected{
+  @extend .user-card;
+  background-color: #b1ce87 !important;
+}
+.user-card-selected:hover{
+  background-color: #a9c27f !important;
+  cursor:pointer;
+}
