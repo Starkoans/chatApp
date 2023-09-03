@@ -17,6 +17,7 @@
     },
     "plugins": [
         "react",
+        "@trivago/prettier-plugin-sort-imports",
         "prettier"
     ],
     "rules": {
