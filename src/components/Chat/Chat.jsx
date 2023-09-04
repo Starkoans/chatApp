@@ -10,19 +10,17 @@ import InputEnterGroup from '../InputEnterGroup/InputEnterGroup.jsx';
 import './Chat.scss'
 
 export default function Chat() {
- const selectedChat = useSelector(state => state.selectedChat);
- const currentUser = useAuth();
- const [chat, setChat] = useState(selectedChat);
- useEffect(() => {setChat(selectedChat)},[selectedChat]);
+    const selectedChat = useSelector(state => state.selectedChat);
+    const currentUser = useAuth();
+    const [chat, setChat] = useState(selectedChat);
+    useEffect(() => {setChat(selectedChat)},[selectedChat]);
+    const messageRef  = ref(db, `messages/${chat.chatId}`)
 
- const messageRef  = ref(db, `messages/${chat.chatId}`)
- const handleSubmit = async (messageText) => {
-   console.log(messageText);
-   console.log(chat.chatId);
-   await push(messageRef, {
-    userId: currentUser.uid,
-    text: messageText,
-    timeStamp: Timestamp.fromDate(new Date()),
+    const handleSubmit = async (messageText) => {
+        await push(messageRef, {
+            userId: currentUser.uid,
+            text: messageText,
+            timeStamp: Timestamp.fromDate(new Date()),
    })
  }
 

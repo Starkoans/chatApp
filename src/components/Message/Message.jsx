@@ -5,15 +5,15 @@ export default function Message({ message }) {
 	const currentUser = useAuth();
 	return (
 		<div
-			className={classNames('message', message.userID===currentUser.id? 'my-message':'not-my-message')}
+			className={classNames('message', message.userId===currentUser.id? 'my-message':'not-my-message')}
 		>
-			{message.userID!==currentUser.id && <div className='not-my-message-triangle'/>}
+			{message.userId!==currentUser.id && <div className='not-my-message-triangle'/>}
 				<div
 					className='message-box'
 					key={message.key}>
 					<p>{message.text}</p>
 				</div>
-			{message.userID===currentUser.id && <div className='my-message-triangle'/>}
+			{message.userId===currentUser.id && <div className='my-message-triangle'/>}
 		</div>
 	);
 }

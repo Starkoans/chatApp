@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {collection, query, where, getDocs, limit} from "firebase/firestore";
 import {onValue, ref } from 'firebase/database'
 import {firestore, db} from '../firebase.js'
@@ -33,50 +33,41 @@ function UserSearch() {
     const currentUser = useAuth();
     const selectedChat = useSelector(state => state.selectedChat);
 
-    useEffect(() => {
-        //find chat in firebase and load it
-        const chatRef = ref(db, `messages/${selectedChat.chatId}`);
-        onValue(chatRef, (snapshot) => {
-            if(snapshot.exists()){
-                snapshot.forEach(
-                    () => {
-                        const data = snapshot.val();
-                        console.log(data);
-                        let messageList = [];
-                        Object.keys(data).forEach((key) => { messageList.push({id:key, ...data[key] }) })
-                        console.log(messageList);
-                        dispatch(setMessageList(messageList))
-                    }
-                )
-            }
-            else{
-                dispatch(setMessageList(null))
-            }
-        });
-    },[selectedChat.chatId])
-
     const handleSelect =  (e, selectedUser) => {
+        dispatch(removeUserChat());
         e.preventDefault();
         dispatch(selectUser({
             uid: selectedUser.uid,
             username: selectedUser.username
         }))
-        let chatID = currentUser.uid + selectedUser.uid;
-        const chatRefCheck = ref(db, `messages/${chatID}`)
-        onValue(chatRefCheck, (snapshot) =>
+        onValue(ref(db, `messages/${currentUser.uid + selectedUser.uid}`), (snapshot) =>
             {
-                if(snapshot.exists()) {console.log('первый: ')}
-                else chatID = selectedUser.uid + currentUser.uid;
+                if(snapshot.exists()) {
+                    console.log('первый: ');
+                    console.log()
+                    dispatch(setChatId(currentUser.uid + selectedUser.uid));
+
+                    const data = snapshot.val();
+                    let messageList = [];
+                    Object.keys(data).forEach((key) => { messageList.push({id:key, ...data[key] }) })
+                    dispatch(setMessageList(messageList))
+                }
             }
         );
-        onValue(chatRefCheck, (snapshot) =>
+        onValue(ref(db, `messages/${selectedUser.uid + currentUser.uid}`), (snapshot) =>
             {
-                if(snapshot.exists()) {console.log('второй')}
-                else chatID = null;
+                if(snapshot.exists()) {
+                    dispatch(setChatId(selectedUser.uid + currentUser.uid));
+                    console.log('второй')
+
+                    const data = snapshot.val();
+                    let messageList = [];
+                    Object.keys(data).forEach((key) => { messageList.push({id:key, ...data[key] }) })
+                    dispatch(setMessageList(messageList))
+                }
             }
         );
-        if(chatID){dispatch(setChatId(chatID))}
-        else {dispatch(setChatId(currentUser.uid + selectedUser.uid))}
+        if(!selectedChat.chatId){dispatch(setChatId(currentUser.uid + selectedUser.uid))}
         navigate(`${selectedUser.uid}`)
     }
 
