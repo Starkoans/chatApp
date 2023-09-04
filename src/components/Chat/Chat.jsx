@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { push, ref} from "firebase/database";
 import {db} from "../../firebase.js";
 import {Timestamp} from "firebase/firestore";
-import Message from "../Message/Message.jsx";
+import Message from "./Message/Message.jsx";
 import { useSelector } from 'react-redux';
 import UserCard from '../UserCard/UserCard.jsx';
 import InputEnterGroup from '../InputEnterGroup/InputEnterGroup.jsx';

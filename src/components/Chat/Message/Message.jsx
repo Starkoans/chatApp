@@ -1,4 +1,4 @@
-import { useAuth } from '../../hooks/UseAuth.js';
+import { useAuth } from '../../../hooks/UseAuth.js';
 import './Message.scss';
 import classNames from 'classnames';
 export default function Message({ message, selectedUsername }) {
