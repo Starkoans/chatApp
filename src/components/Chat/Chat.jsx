@@ -1,5 +1,5 @@
 import {useAuth} from "../../hooks/UseAuth.js";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { push, ref} from "firebase/database";
 import {db} from "../../firebase.js";
 import {Timestamp} from "firebase/firestore";
@@ -21,8 +21,12 @@ export default function Chat() {
             userId: currentUser.uid,
             text: messageText,
             timeStamp: Timestamp.fromDate(new Date()),
-   })
- }
+        })
+    }
+    const bottomRef = useRef(null);
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+    }, [chat.messagesList]);
 
  return(
      <div className="chat bg-candy">
@@ -34,8 +38,9 @@ export default function Chat() {
                  </div>
                  :
                  chat.messagesList.map(
-               (message, key) => {return (<Message message={message} key={key}/>)}
+               (message, key) => {return (<Message message={message} selectedUsername={chat.username} key={key}/>)}
            )}
+             <div ref={bottomRef} />
          </div>
          <div className='sticky-bottom p-0'>
              <InputEnterGroup

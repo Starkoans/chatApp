@@ -8,6 +8,7 @@ export default function InputEnterGroup({ handleEnter, isCleanedAfter, initialVa
         handleEnter(value);
         isCleanedAfter && setValue('')
     }
+
     return(
         <Form
             onSubmit={(e)=>handleSubmit(e)}>
@@ -17,7 +18,7 @@ export default function InputEnterGroup({ handleEnter, isCleanedAfter, initialVa
                 className={isRounded?'rounded-start-3 h-100 p-3':'rounded-0 h-100 p-3'}
                 type="text"
                 onKeyDown={(e)=> {
-                    e.key === 'Enter' && handleSubmit(e);
+                    e.key === 'Enter' && value && handleSubmit(e);
                 }}
                 value={value}
                 placeholder={child}
