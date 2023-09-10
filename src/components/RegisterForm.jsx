@@ -103,8 +103,8 @@ function RegisterForm() {
 				}}
 				className="container mt-3 flex-column  d-flex"
 			>
-				<h3 className="mb-3">Регистрация</h3>
-				<p>
+				<h4 className="mb-3 text-center">Регистрация</h4>
+				<p className='text-center'>
 					{'Уже есть аккаунт? '}
 					<Link to={'/login'}>Войти</Link>
 				</p>

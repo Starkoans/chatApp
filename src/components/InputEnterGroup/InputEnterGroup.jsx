@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-
+import './InputEnterGroup.module.scss'
 export default function InputEnterGroup({ handleEnter, isCleanedAfter, initialValue, isRounded, child}){
     const [value, setValue] = useState(initialValue || '');
     const handleSubmit = (e) => {
@@ -25,7 +25,7 @@ export default function InputEnterGroup({ handleEnter, isCleanedAfter, initialVa
                 onChange={event => setValue(event.target.value)}
             />
             <Button
-                className={isRounded?'btn-dark rounded-end-3':'btn-dark rounded-0'}
+                className={isRounded?'btn-dark rounded-end-3':' btn-dark enter rounded-0'}
                 type="submit"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

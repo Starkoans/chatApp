@@ -5,7 +5,7 @@ import {getAuth, signInWithEmailAndPassword, signInWithPopup} from 'firebase/aut
 import {setUser} from '../store/user.slice.js';
 import { provider } from '../firebase.js';
 import { useAuth } from '../hooks/UseAuth.js';
-
+import '../App.scss';
 const LoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -74,7 +74,7 @@ const LoginForm = () => {
             event.preventDefault();
             handleLogin(email, password)
         }}>
-            <h3>Авторизация</h3>
+            <h4 className='text-center'>Авторизация</h4>
 
                 <label className='mb-3 form-text'>Почта
                 <input
@@ -106,9 +106,10 @@ const LoginForm = () => {
             <div className='mt-3 d-flex flex-column text-center'>
                 Или
                 <button
-                    className='m-3 p-2 btn btn-dark'
+                    // style={{backgroundColor:'#3F4D4E'}}
+                    className='m-3 p-2 btn btn-dark bg-froggy-dark'
                     onClick={loginWithGoogle}>
-                    Войти иcпользуя Google
+                    Войти c Google
                 </button>
 
             </div>
