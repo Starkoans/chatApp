@@ -1,17 +1,20 @@
-import {useState} from "react";
-import {collection, query, where, getDocs, limit} from "firebase/firestore";
+import { useEffect, useState } from 'react';
+import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import {onValue, ref } from 'firebase/database'
-import {firestore, db} from '../firebase.js'
-import {useAuth} from "../hooks/UseAuth.js";
+import {firestore, db} from '../../firebase.js'
+import {useAuth} from "../../hooks/UseAuth.js";
 import {useDispatch, useSelector} from "react-redux";
-import {removeUserChat, selectUser, setChatId, setMessageList} from "../store/selectedChat.slice.js";
+import {removeUserChat, selectUser, setChatId, setMessageList} from "../../store/selectedChat.slice.js";
 import { useNavigate} from "react-router-dom";
-import UserCard from './UserCard/UserCard.jsx';
-import InputEnterGroup from './InputEnterGroup/InputEnterGroup.jsx';
+import InputEnterGroup from '../InputEnterGroup/InputEnterGroup.jsx';
+import RecentUsers from './RecentUsers.jsx';
+import GlobalUsers from './GlobalUsers.jsx';
+
 function UserSearch() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const currentUser = useAuth();
+    const selectedChat = useSelector(state => state.selectedChat);
     const [usersQueryList, setUsersQueryList] = useState([]);
 
     const handleSearchUser = async (username) => {
@@ -19,32 +22,24 @@ function UserSearch() {
             where("username", ">=", username),
             where("username", '<=', username +'z'),
             limit(10));
-
-        dispatch(removeUserChat);
         setUsersQueryList([]);
         const usersQuerySnapshot = await getDocs(q);
         usersQuerySnapshot.empty? setUsersQueryList(null) :
             usersQuerySnapshot.forEach((doc) => {
-                // console.log(doc.id, " => ", doc.data());
-                    setUsersQueryList(usersQueryList => [...usersQueryList, {...doc.data(), id:doc.id}])
-                })
-
-    }
-    const currentUser = useAuth();
-    const selectedChat = useSelector(state => state.selectedChat);
-
+                setUsersQueryList(usersQueryList => [...usersQueryList, {...doc.data(), uid:doc.id}])
+            })
+    };
     const handleSelect =  (e, selectedUser) => {
         dispatch(removeUserChat());
         e.preventDefault();
         dispatch(selectUser({
             uid: selectedUser.uid,
             username: selectedUser.username
-        }))
+        }));
         onValue(ref(db, `messages/${currentUser.uid + selectedUser.uid}`), (snapshot) =>
             {
                 if(snapshot.exists()) {
                     console.log('первый: ');
-                    console.log()
                     dispatch(setChatId(currentUser.uid + selectedUser.uid));
 
                     const data = snapshot.val();
@@ -67,21 +62,19 @@ function UserSearch() {
                 }
             }
         );
-        if(!selectedChat.chatId){dispatch(setChatId(currentUser.uid + selectedUser.uid))}
         navigate(`${selectedUser.uid}`)
     }
+    useEffect(()=>{
+        if(selectedChat.chatId === null){
+            dispatch(setChatId(currentUser.uid + selectedChat.uid));
+        }
+    },[selectedChat])
 
     return(
         <div className="bg-froggy" style={{ maxWidth: '300px'}}>
             <InputEnterGroup handleEnter={handleSearchUser} child='Введите имя...'/>
-            {
-                usersQueryList?
-                usersQueryList.map((user)=>{
-                    return(<UserCard user={user} handleSelect={handleSelect} key={user.uid}/>)
-                }
-                ):
-                    <p className='p-4'>Пользователь не найден...</p>
-            }
+            <RecentUsers handleSelect={handleSelect}/>
+            <GlobalUsers usersQueryList={usersQueryList} handleSelect={handleSelect}/>
         </div>
 
     )

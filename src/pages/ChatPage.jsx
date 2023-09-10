@@ -1,5 +1,5 @@
 import {useAuth} from "../hooks/UseAuth.js";
-import {UserSearch} from "../components/UserSearchPanel.jsx";
+import {UserSearch} from "../components/UserSearch/UserSearchPanel.jsx";
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
