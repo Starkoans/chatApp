@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import userSvg from './UserSvg.svg'
-import './UserCard.scss'
+import './UserCard.module.scss'
 import cn from 'classnames';
 
 
@@ -14,16 +14,16 @@ export default function UserCard({handleSelect, user }){
     const selected = useSelector(state => state.selectedChat.uid)
     const [isSelected, setIsSelected]= useState(selected) ;
     useEffect(() => {
-        console.log(isSelected);
+        console.log(user.uid);
         console.log(selected);
         setIsSelected(selected);
     },[selected])
     return(
         <Card
             onClick={(e) => {
-                handleSelect && handleSelect(e, {uid: user.id, username: user.username} )}}
+                handleSelect && handleSelect(e, {uid: user.uid, username: user.username} )}}
             className={cn(userCard,
-                selected===user.id? 'user-card-selected':'user-card') }
+                isSelected===user.uid? 'user-card-selected':'user-card') }
         >
             <Card.Img
                 className={userCardImg}
