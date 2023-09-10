@@ -2,9 +2,8 @@ import InputEnterGroup from '../InputEnterGroup/InputEnterGroup.jsx';
 import { useState } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { updateUserName } from '../../store/user.slice.js';
-import { collection, doc } from 'firebase/firestore';
+import { collection, doc, updateDoc} from 'firebase/firestore';
 import { firestore } from '../../firebase.js';
-import { setDoc } from '@firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../hooks/UseAuth.js';
 
@@ -23,8 +22,7 @@ export default function ProfileUsername({username}){
             }).catch((error) => {
                 console.error(error);
             });
-            const userCollectionRef = collection(firestore, 'users');
-            await setDoc(doc(userCollectionRef, user.uid), {
+            await updateDoc(doc(collection(firestore, 'users'), user.uid), {
                 username: newName,
             });
             setNameIsEdited(false);
