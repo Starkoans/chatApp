@@ -2,25 +2,27 @@ import {Link, Outlet, useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/UseAuth.js";
 import { Nav } from 'react-bootstrap';
 import { useEffect } from 'react';
-import { doc } from 'firebase/firestore';
+import { collection, doc, getDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase.js';
 import { setDoc } from '@firebase/firestore';
-import './Layout.scss'
+import './Layout.module.scss'
 import Logo from '../../../public/Logo.svg';
 export default function Layout(){
     const user = useAuth();
     const navigate =useNavigate();
+    const isUserExists = async () =>{
+        const isUserExists = await getDoc(doc(collection(firestore, 'users'), user.uid));
+        return isUserExists.exists() ;
+    }
 
     useEffect(()=>{
         if(user.uid){
-            const userRef = doc(firestore, 'users', user.uid)
             const writeUsernameForFirstTime = async () => {
-                await setDoc(userRef, {
+                await setDoc(doc(firestore, 'users', user.uid), {
                     username: user.username,
                 });
             }
-                console.log(userRef);
-                if (!userRef.converter) writeUsernameForFirstTime();
+            !isUserExists() && writeUsernameForFirstTime();
         }
     },[user.uid])
 
