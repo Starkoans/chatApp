@@ -12,11 +12,12 @@ export default function RecentUsers({handleSelect}){
     const recentChats = useSelector(state => state.user.recentChats);
     const [recentChatsList, setRecentChatsList] = useState(recentChats);
 
-    async function updateRecentChats(chatList){
+    const updateRecentChats = async (chatList) => {
         await updateDoc(doc(collection(firestore, 'users'), currentUser.uid), {
             recentChats: chatList,
         });
-    }
+    };
+
     useEffect(()=>{
         setRecentChatsList(recentChats);
         recentChats.length && updateRecentChats(recentChats);
