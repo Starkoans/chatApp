@@ -5,7 +5,8 @@ const initialState = {
     username:null,
     email:null,
     password:null,
-    avatar: null
+    avatar: null,
+    recentChats:[]
 };
 
 const userSlice = createSlice({
@@ -19,6 +20,16 @@ const userSlice = createSlice({
             state.username = action.payload.username;
             state.avatar = action.payload.avatar;
         },
+        setRecentChats:(state, action)=>{
+            state.recentChats = action.payload;
+        },
+        unshiftToRecentChats:(state,action)=>{
+             state.recentChats.unshift(action.payload);
+        },
+        removeFromRecentChats:(state, action)=>{
+            const newRecentChats = state.recentChats.filter(chat => chat.uid !== action.payload)
+            state.recentChats = newRecentChats;
+        },
         updateUserName: (state, action)=>{
             state.username = action.payload;
         },
@@ -27,9 +38,10 @@ const userSlice = createSlice({
             state.username = null;
             state.email = null;
             state.password = null;
+            state.recentChats = [];
         }
     }
 })
 
-export const {setUser, removeUser, updateUserName} = userSlice.actions;
+export const {setUser, removeUser, updateUserName, setRecentChats, removeFromRecentChats, unshiftToRecentChats} = userSlice.actions;
 export default userSlice.reducer;
