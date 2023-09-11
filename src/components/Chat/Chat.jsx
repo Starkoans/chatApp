@@ -33,7 +33,10 @@ export default function Chat() {
         bottomRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [chat.messagesList]);
 
-    let prevDay = new Date(chat.messagesList[0].timeStamp.seconds * 1000);
+    let prevDay;
+    if(chat.messagesList[0]) {
+        prevDay = new Date(chat.messagesList[0].timeStamp.seconds * 1000);
+    }
 
  return(
      <div className="chat bg-candy">
