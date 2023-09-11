@@ -39,7 +39,7 @@ export default function Chat() {
      <div className="chat bg-candy">
       <UserCard user={{ id:chat.uid, username:chat.username }}/>
          <div className='chat-content'>
-             {(chat.messagesList || !chat.messagesList.length)?
+             {(chat.messagesList && !chat.messagesList.length)?
                  <div className='h-100 d-flex flex-column justify-content-center align-items-center text-secondary'>
                      <img src={NoMessagesImg} alt='No messages'/>
                      <p>Сообщений пока нет...</p>
